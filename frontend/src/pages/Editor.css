@@ -1,0 +1,1310 @@
+
+/* =========================================
+   CLOUDCODE - VS CODE INSPIRED IDE
+========================================= */
+
+:root {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #cccccc;
+  background: #1e1e1e;
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* =========================================
+   MAIN IDE LAYOUT
+========================================= */
+
+.ed.ed-vscode {
+  --ide-bg: #1e1e1e;
+  --ide-panel: #181818;
+  --ide-sidebar: #252526;
+  --ide-border: #333333;
+  --ide-text: #cccccc;
+  --ide-muted: #858585;
+  --ide-accent: #007acc;
+  --ide-hover: #2a2d2e;
+  --ide-active: #37373d;
+
+  display: grid;
+  grid-template-rows: 48px minmax(0, 1fr) 5px 220px;
+  width: 100%;
+  height: 100vh;
+  min-height: 0;
+  color: var(--ide-text);
+  background: var(--ide-bg);
+  overflow: hidden;
+}
+
+/* =========================================
+   TOP TOOLBAR
+========================================= */
+
+.ed-toolbar,
+.ed-header,
+.ed-topbar {
+  min-width: 0;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 14px;
+  background: #181818;
+  border-bottom: 1px solid var(--ide-border);
+}
+
+.ed-toolbar-layout {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+
+.ed-brand,
+.ed-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e5e5e5;
+  white-space: nowrap;
+}
+
+.ed-toolbar button,
+.ed-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 9px;
+  color: #cccccc;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 12px;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.ed-toolbar button:hover,
+.ed-icon-btn:hover {
+  background: #2a2d2e;
+  border-color: #3c3c3c;
+}
+
+.ed-toolbar select,
+.ed-language-select {
+  height: 30px;
+  padding: 0 9px;
+  color: #cccccc;
+  background: #252526;
+  border: 1px solid #3c3c3c;
+  border-radius: 4px;
+  outline: none;
+  font-size: 12px;
+}
+
+.ed-toolbar select:focus,
+.ed-language-select:focus {
+  border-color: var(--ide-accent);
+}
+
+.ed-save-btn {
+  color: #ffffff !important;
+  background: #0e639c !important;
+}
+
+.ed-save-btn:hover {
+  background: #1177bb !important;
+}
+
+.ed-run-btn {
+  color: #ffffff !important;
+  background: #16825d !important;
+}
+
+.ed-run-btn:hover {
+  background: #199b6c !important;
+}
+
+.ed-toolbar button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* =========================================
+   ACTIVITY BAR
+========================================= */
+
+.ed-activity-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: 48px;
+  min-width: 48px;
+  height: 100%;
+  padding: 8px 0;
+  background: #181818;
+  border-right: 1px solid var(--ide-border);
+  overflow: hidden;
+}
+
+.ed-activity-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 46px;
+  color: #858585;
+  background: transparent;
+  border: none;
+  border-left: 2px solid transparent;
+  font-size: 20px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.ed-activity-icon:hover {
+  color: #ffffff;
+  background: #252526;
+}
+
+.ed-activity-icon.active,
+.ed-activity-icon[aria-pressed="true"] {
+  color: #ffffff;
+  border-left-color: #ffffff;
+}
+
+.ed-activity-spacer {
+  flex: 1;
+}
+
+/* =========================================
+   WORKSPACE BODY
+========================================= */
+
+.ed-body.ed-vscode-body {
+  display: grid;
+  grid-template-columns: 48px 240px 5px minmax(0, 1fr) 5px 280px;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--ide-bg);
+}
+
+.ed-body {
+  min-width: 0;
+  min-height: 0;
+}
+
+/* =========================================
+   EXPLORER SIDEBAR
+========================================= */
+
+.ed-files {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  color: #cccccc;
+  background: #252526;
+  overflow: hidden;
+}
+
+.ed-files-header,
+.ed-explorer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 36px;
+  min-height: 36px;
+  padding: 0 12px;
+  color: #bbbbbb;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+
+.ed-files-header button,
+.ed-explorer-header button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  color: #cccccc;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+}
+
+.ed-files-header button:hover,
+.ed-explorer-header button:hover {
+  background: #37373d;
+}
+
+.ed-files-list,
+.ed-file-list {
+  flex: 1;
+  min-height: 0;
+  padding: 4px 0;
+  overflow: auto;
+}
+
+.ed-file,
+.ed-file-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 27px;
+  padding: 3px 9px 3px 15px;
+  color: #cccccc;
+  font-size: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ed-file:hover,
+.ed-file-item:hover {
+  background: #2a2d2e;
+}
+
+.ed-file.active,
+.ed-file-item.active,
+.ed-file[aria-selected="true"] {
+  background: #37373d;
+  color: #ffffff;
+}
+
+.ed-file-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ed-file-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: auto;
+  opacity: 0;
+}
+
+.ed-file:hover .ed-file-actions,
+.ed-file-item:hover .ed-file-actions {
+  opacity: 1;
+}
+
+.ed-file-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  color: #cccccc;
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+}
+
+.ed-file-actions button:hover {
+  background: #454545;
+}
+
+/* =========================================
+   RESIZERS
+========================================= */
+
+.ed-resizer {
+  position: relative;
+  z-index: 5;
+  background: transparent;
+  touch-action: none;
+  user-select: none;
+}
+
+.ed-resizer:hover,
+.ed-resizer:active {
+  background: #007acc;
+}
+
+.ed-resizer-vertical {
+  width: 5px;
+  min-width: 5px;
+  height: 100%;
+  cursor: col-resize;
+}
+
+.ed-resizer-horizontal {
+  width: 100%;
+  height: 5px;
+  min-height: 5px;
+  cursor: row-resize;
+}
+
+/* =========================================
+   EDITOR CENTER
+========================================= */
+
+.ed-center {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #1e1e1e;
+}
+
+.ed-tabs {
+  display: flex;
+  align-items: stretch;
+  height: 36px;
+  min-height: 36px;
+  background: #181818;
+  border-bottom: 1px solid #333333;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.ed-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 110px;
+  max-width: 220px;
+  height: 36px;
+  padding: 0 13px;
+  color: #969696;
+  background: #2d2d2d;
+  border: none;
+  border-right: 1px solid #252526;
+  border-top: 1px solid transparent;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.ed-tab:hover {
+  color: #ffffff;
+}
+
+.ed-tab.active {
+  color: #ffffff;
+  background: #1e1e1e;
+  border-top: 1px solid #007acc;
+}
+
+.ed-tab-close {
+  margin-left: auto;
+  color: #858585;
+}
+
+.ed-monaco {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.ed-monaco .monaco-editor,
+.ed-monaco .overflow-guard {
+  min-height: 0;
+}
+
+/* =========================================
+   RIGHT OUTPUT PANEL
+========================================= */
+
+.ed-out,
+.ed-output-panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  background: #181818;
+  overflow: hidden;
+}
+
+.ed-out-header,
+.ed-output-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 36px;
+  min-height: 36px;
+  padding: 0 12px;
+  color: #cccccc;
+  background: #181818;
+  border-bottom: 1px solid #333333;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.ed-out-body {
+  flex: 1;
+  min-height: 0;
+  padding: 12px;
+  overflow: auto;
+}
+
+.ed-pre,
+.ed-output-content {
+  margin: 0;
+  color: #cccccc;
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================
+   BOTTOM PANEL
+========================================= */
+
+.ed-bottom-wrap {
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #181818;
+}
+
+.ed-drawer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  background: #181818;
+  overflow: hidden;
+}
+
+.ed-dtabs {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  height: 35px;
+  min-height: 35px;
+  padding: 0 15px;
+  background: #181818;
+  border-bottom: 1px solid #333333;
+}
+
+.ed-dtab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 35px;
+  padding: 0;
+  color: #858585;
+  background: transparent;
+  border: none;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.ed-dtab:hover {
+  color: #ffffff;
+}
+
+.ed-dtab[aria-selected="true"] {
+  color: #ffffff;
+}
+
+.ed-dtab[aria-selected="true"]::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: #007acc;
+  content: "";
+}
+
+.ed-dbody {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: #181818;
+}
+
+/* =========================================
+   XTERM TERMINAL
+========================================= */
+
+.ed-terminal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: #181818;
+}
+
+.ed-xterm {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  padding: 7px 12px 0;
+  overflow: hidden;
+}
+
+.ed-xterm .xterm {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.ed-xterm .xterm-viewport {
+  overflow-y: auto !important;
+}
+
+.ed-xterm .xterm-screen {
+  height: 100%;
+}
+
+.ed-terminal-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 23px;
+  min-height: 23px;
+  padding: 0 12px;
+  color: #858585;
+  background: #181818;
+  border-top: 1px solid #2d2d2d;
+  font-size: 10px;
+}
+
+/* =========================================
+   PROBLEMS PANEL
+========================================= */
+
+.ed-problems {
+  width: 100%;
+  height: 100%;
+  padding: 9px 14px;
+  overflow: auto;
+}
+
+.ed-problem {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 27px;
+  color: #cccccc;
+  font-size: 12px;
+}
+
+.ed-problem-icon {
+  color: #f14c4c;
+  font-size: 10px;
+}
+
+.ed-empty {
+  padding: 12px 3px;
+  color: #858585;
+  font-size: 12px;
+}
+
+/* =========================================
+   PROFILE DROPDOWN
+========================================= */
+
+.ed-profile-menu {
+  position: absolute;
+  top: calc(100% + 5px);
+  right: 0;
+  z-index: 100;
+  width: 190px;
+  padding: 5px;
+  background: #252526;
+  border: 1px solid #454545;
+  border-radius: 5px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.ed-profile-menu button,
+.ed-profile-menu a {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 34px;
+  padding: 0 10px;
+  color: #cccccc;
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+  font-size: 12px;
+  text-align: left;
+  text-decoration: none;
+}
+
+.ed-profile-menu button:hover,
+.ed-profile-menu a:hover {
+  color: #ffffff;
+  background: #37373d;
+}
+
+.ed-profile-wrapper {
+  position: relative;
+}
+
+/* =========================================
+   STATUS / EMPTY STATES
+========================================= */
+
+.ed-status,
+.ed-statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 22px;
+  padding: 0 10px;
+  color: #ffffff;
+  background: #007acc;
+  font-size: 10px;
+}
+
+/* =========================================
+   SCROLLBARS
+========================================= */
+
+.ed-vscode * {
+  scrollbar-width: thin;
+  scrollbar-color: #424242 transparent;
+}
+
+.ed-vscode *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.ed-vscode *::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ed-vscode *::-webkit-scrollbar-thumb {
+  background: #424242;
+}
+
+.ed-vscode *::-webkit-scrollbar-thumb:hover {
+  background: #555555;
+}
+
+/* =========================================
+   FULLSCREEN
+========================================= */
+
+.ed.ed-vscode:fullscreen {
+  width: 100%;
+  height: 100%;
+  background: #1e1e1e;
+}
+
+/* =========================================
+   RESPONSIVE LAYOUT
+========================================= */
+
+@media (max-width: 1000px) {
+  .ed-body.ed-vscode-body {
+    grid-template-columns: 48px 190px 5px minmax(0, 1fr) 0 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .ed-toolbar,
+  .ed-header,
+  .ed-topbar {
+    gap: 5px;
+    padding: 0 7px;
+  }
+
+  .ed-brand,
+  .ed-logo {
+    font-size: 12px;
+  }
+
+  .ed-toolbar button {
+    min-width: 27px;
+    padding: 0 5px;
+  }
+
+  .ed-body.ed-vscode-body {
+    grid-template-columns: 42px minmax(0, 1fr) 0 0 0 0;
+  }
+
+  .ed-activity-bar {
+    width: 42px;
+    min-width: 42px;
+  }
+
+  .ed-activity-icon {
+    width: 42px;
+  }
+}
+
+
+
+/* =========================================
+   CLOUDCODE TOOLBAR - FINAL STYLING
+========================================= */
+
+.ed-bar {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: 48px;
+  min-width: 0;
+  padding: 0 14px;
+  background: #181818;
+  border-bottom: 1px solid #333333;
+}
+
+.ed-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;
+  padding: 0;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.ed-logo-icon {
+  display: flex;
+  align-items: center;
+}
+
+.ed-sep {
+  width: 1px;
+  height: 21px;
+  flex-shrink: 0;
+  background: #444444;
+}
+
+.ed-proj {
+  max-width: 190px;
+  overflow: hidden;
+  color: #cccccc;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ed-select {
+  max-width: 135px;
+  height: 29px;
+  padding: 0 9px;
+  color: #cccccc;
+  background: #252526;
+  border: 1px solid #3c3c3c;
+  border-radius: 4px;
+  font-size: 12px;
+  outline: none;
+}
+
+.ed-spacer {
+  flex: 1;
+  min-width: 5px;
+}
+
+.ed-saved {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: #aaaaaa;
+  font-size: 11px;
+}
+
+.ed-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 30px;
+  flex-shrink: 0;
+  padding: 0 11px;
+  color: #cccccc;
+  background: #252526;
+  border: 1px solid #454545;
+  border-radius: 4px;
+  font-size: 12px;
+  transition: background 0.15s ease;
+}
+
+.ed-btn:hover {
+  color: #ffffff;
+  background: #37373d;
+}
+
+.ed-btn.run {
+  color: #ffffff;
+  background: #16825d;
+  border-color: #16825d;
+}
+
+.ed-btn.run:hover {
+  background: #199b6c;
+}
+
+.ed-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Profile dropdown */
+
+.ed-profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.ed-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: #ffffff;
+  background: #3759b5;
+  border: 1px solid #6682d4;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ed-avatar:hover {
+  background: #496dce;
+}
+
+.ed-profile-info {
+  padding: 9px 10px;
+}
+
+.ed-profile-name {
+  overflow: hidden;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ed-profile-label {
+  margin-top: 4px;
+  color: #858585;
+  font-size: 10px;
+}
+
+.ed-profile-divider {
+  height: 1px;
+  margin: 4px 0;
+  background: #3c3c3c;
+}
+
+.ed-profile-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 34px;
+  padding: 0 10px;
+  color: #cccccc;
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ed-profile-item:hover {
+  color: #ffffff;
+  background: #37373d;
+}
+
+.ed-profile-item.logout:hover {
+  color: #ff7777;
+  background: #3a2525;
+}
+
+@media (max-width: 700px) {
+  .ed-bar {
+    gap: 6px;
+    padding: 0 7px;
+  }
+
+  .ed-proj,
+  .ed-saved {
+    display: none;
+  }
+
+  .ed-btn {
+    gap: 4px;
+    padding: 0 7px;
+  }
+}
+
+
+/* =========================================
+   FILE EXPLORER - COMPACT VS CODE STYLE
+========================================= */
+
+.ed-files {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  background: #252526;
+  overflow: hidden;
+}
+
+.ed-files-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 36px;
+  min-height: 36px;
+  padding: 0 10px 0 14px;
+  color: #bbbbbb;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+}
+
+.ed-explorer-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ed-explorer-actions button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  padding: 5px;
+  color: #cccccc;
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+}
+
+.ed-explorer-actions button:hover {
+  background: #37373d;
+}
+
+.ed-explorer-actions .ic {
+  width: 15px;
+  height: 15px;
+}
+
+.ed-files-list {
+  flex: 1;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.ed-tree {
+  width: 100%;
+  margin: 0;
+  padding: 2px 0;
+  list-style: none;
+}
+
+.ed-tree-row {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.ed-item {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 27px;
+  min-height: 27px;
+  gap: 8px;
+  padding: 0 8px 0 15px;
+  color: #cccccc;
+  font-size: 12px;
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+}
+
+.ed-item:hover {
+  background: #2a2d2e;
+}
+
+.ed-item.active {
+  color: #ffffff;
+  background: #37373d;
+}
+
+.ed-item:focus-visible {
+  outline: 1px solid #007acc;
+  outline-offset: -1px;
+}
+
+.ed-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 18px;
+  flex-shrink: 0;
+  color: #c5c5c5;
+}
+
+.ed-item-icon .ic {
+  display: block;
+  width: 15px;
+  height: 15px;
+  max-width: 15px;
+  max-height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ed-item-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: inherit;
+  font-size: 12px;
+  line-height: 27px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ed-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+  opacity: 0;
+}
+
+.ed-item:hover .ed-item-actions,
+.ed-item:focus-within .ed-item-actions {
+  opacity: 1;
+}
+
+.ed-item-actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 4px;
+  color: #cccccc;
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+}
+
+.ed-item-actions button:hover {
+  background: #454545;
+}
+
+.ed-item-actions .ic {
+  display: block;
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ed-new {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 9px 10px;
+  border-top: 1px solid #333333;
+}
+
+.ed-new button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  height: 29px;
+  padding: 0 8px;
+  color: #cccccc;
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+  font-size: 11px;
+  text-align: left;
+}
+
+.ed-new button:hover {
+  color: #ffffff;
+  background: #37373d;
+}
+
+.ed-new .ic {
+  display: block;
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ed-explorer-empty {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 14px;
+  color: #858585;
+  font-size: 12px;
+}
+
+.ed-explorer-empty button {
+  align-self: flex-start;
+  padding: 6px 9px;
+  color: #ffffff;
+  background: #0e639c;
+  border: none;
+  border-radius: 3px;
+  font-size: 11px;
+}
+
+
+/* =========================================
+   OUTPUT PANEL HEADER AND CLEAR BUTTON
+========================================= */
+
+.ed-out > .ed-out-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 40px;
+  min-height: 40px;
+  padding: 0 12px;
+  background: #181818;
+  border-bottom: 1px solid #333333;
+}
+
+.ed-out-header .ed-panel-title {
+  color: #cccccc;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+}
+
+.ed-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  padding: 0 10px;
+  margin-left: auto;
+  color: #cccccc;
+  background: #252526;
+  border: 1px solid #414141;
+  border-radius: 4px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.ed-clear:hover {
+  color: #ffffff;
+  background: #37373d;
+  border-color: #555555;
+}
+
+.ed-out > .ed-pre {
+  flex: 1;
+  min-height: 0;
+  margin: 0;
+  padding: 12px;
+  overflow: auto;
+  color: #cccccc;
+  background: #181818;
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+
+/* Keep grid columns aligned when panels are hidden */
+.ed-grid-placeholder {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
