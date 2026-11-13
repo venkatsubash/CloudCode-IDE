@@ -13,7 +13,7 @@ import Toolbar from "../components/editor/Toolbar";
 import FileExplorer from "../components/editor/FileExplorer";
 import BottomPanel from "../components/editor/BottomPanel";
 
-import { LANGS } from "../data/editorData";
+import { LANGS } from "../Data/editorData";
 
 const getToken = () =>
   localStorage.getItem("token") ||

@@ -8,7 +8,7 @@ import Icon from "../components/common/Icon";
 import {
   NAV,
   NAV_BOTTOM,
-} from "../data/dashboardData";
+} from "../Data/dashboardData";
 
 import { getStorageUsage } from "../services/storageService";
 

@@ -9,7 +9,7 @@ import {
   DEFAULT_SETTINGS,
   THEMES,
   NAV,
-} from "../data/settingsData";
+} from "../Data/settingsData";
 
 function Switch({ id, checked, onChange, labelledBy }) {
   return (

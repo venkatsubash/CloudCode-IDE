@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Icon from "../common/Icon";
-import { LANGS, ICONS } from "../../data/editorData";
+import { LANGS, ICONS } from "../../Data/editorData";
 
 function Toolbar({
   project,

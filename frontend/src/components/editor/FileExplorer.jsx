@@ -1,5 +1,5 @@
 import Icon from "../common/Icon";
-import { ICONS } from "../../data/editorData";
+import { ICONS } from "../../Data/editorData";
 
 function FileExplorer({
   items,

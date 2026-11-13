@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import "./Login.css";
+import "./login.css";
 import Logo from "../components/common/Logo";
-import { LOGIN_TERMINAL_LINES } from "../data/loginData";
+import { LOGIN_TERMINAL_LINES } from "../Data/LoginData";
 
 export default function LoginPage({ onLogin }) {
   const [email, setEmail] = useState("");

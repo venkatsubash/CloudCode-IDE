@@ -10,7 +10,7 @@ import {
   STATUS,
   DATE_OPTIONS,
   DAY_MS,
-} from "../data/historyData";
+} from "../Data/historyData";
 
 const HISTORY_STATUS = {
   ...STATUS,

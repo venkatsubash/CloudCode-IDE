@@ -5,7 +5,7 @@ import "./Projects.css";
 import Logo from "../components/common/Logo";
 import Icon from "../components/common/Icon";
 
-import { NAV, COLUMNS } from "../data/projectsData";
+import { NAV, COLUMNS } from "../Data/projectsData";
 
 const initialForm = {
   name: "",

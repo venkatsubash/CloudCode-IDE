@@ -4,7 +4,7 @@ import "./Register.css";
 
 import Logo from "../components/common/Logo";
 import PasswordField from "../components/auth/PasswordField";
-import { REGISTER_TERMINAL_LINES } from "../data/registerData";
+import { REGISTER_TERMINAL_LINES } from "../Data/registerData";
 
 export default function RegisterPage({ onRegister }) {
   const [form, setForm] = useState({

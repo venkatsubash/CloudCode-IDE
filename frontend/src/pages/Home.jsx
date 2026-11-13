@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import "./Home.css";
+import "./home.css";
 
 const SAMPLES = {
   Python: {
