@@ -1,5 +1,5 @@
 
-const API_URL = "/api/files/storage/usage";
+import { API_URL } from "../config/api";
 
 export const getStorageUsage = async () => {
   const token =
@@ -10,12 +10,15 @@ export const getStorageUsage = async () => {
     throw new Error("Authentication token not found. Please log in again.");
   }
 
-  const response = await fetch(API_URL, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const response = await fetch(
+    API_URL("/api/files/storage/usage"),
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 
   const data = await response.json();
 
