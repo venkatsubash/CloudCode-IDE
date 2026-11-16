@@ -5,6 +5,7 @@ import "./Register.css";
 import Logo from "../components/common/Logo";
 import PasswordField from "../components/auth/PasswordField";
 import { REGISTER_TERMINAL_LINES } from "../Data/registerData";
+import { API_URL } from "../config/api";
 
 export default function RegisterPage({ onRegister }) {
   const [form, setForm] = useState({
@@ -86,7 +87,7 @@ export default function RegisterPage({ onRegister }) {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/auth/register", {
+      const response = await fetch(API_URL("/api/auth/register"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

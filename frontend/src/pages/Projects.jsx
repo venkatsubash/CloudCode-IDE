@@ -6,6 +6,7 @@ import Logo from "../components/common/Logo";
 import Icon from "../components/common/Icon";
 
 import { NAV, COLUMNS } from "../Data/projectsData";
+import { API_URL } from "../config/api";
 
 const initialForm = {
   name: "",
@@ -68,8 +69,8 @@ export default function ProjectsPage() {
         };
 
         const [userRes, projectsRes] = await Promise.all([
-          fetch("/api/auth/me", { headers }),
-          fetch("/api/projects", { headers }),
+          fetch(API_URL("/api/auth/me"), { headers }),
+          fetch(API_URL("/api/projects"), { headers }),
         ]);
 
         const userData = await userRes.json();
@@ -187,7 +188,7 @@ export default function ProjectsPage() {
     try {
       setCreating(true);
 
-      const response = await fetch("/api/projects", {
+      const response = await fetch(API_URL("/api/projects"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

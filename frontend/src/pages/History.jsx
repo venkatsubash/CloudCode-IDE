@@ -11,6 +11,7 @@ import {
   DATE_OPTIONS,
   DAY_MS,
 } from "../Data/historyData";
+import { API_URL } from "../config/api";
 
 const HISTORY_STATUS = {
   ...STATUS,
@@ -270,7 +271,7 @@ export default function HistoryPage({
           return;
         }
 
-        const response = await fetch("/api/history", {
+        const response = await fetch(API_URL("/api/history"), {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,

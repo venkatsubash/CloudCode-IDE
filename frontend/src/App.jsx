@@ -10,6 +10,7 @@ import Projects from "./pages/Projects";
 import Editor from "./pages/Editor";
 import History from "./pages/History";
 import Settings from "./pages/Settings";
+import { API_URL } from "./config/api";
 
 // Handles clicks on the Editor sidebar link.
 function EditorEntry() {
@@ -30,7 +31,7 @@ function EditorEntry() {
           return;
         }
 
-        const response = await fetch("/api/projects", {
+        const response = await fetch(API_URL("/api/projects"), {
           headers: {
             Authorization: `Bearer ${token}`,
           },

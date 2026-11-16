@@ -11,6 +11,7 @@ import {
 } from "../Data/dashboardData";
 
 import { getStorageUsage } from "../services/storageService";
+import { API_URL } from "../config/api";
 
 const formatStorageSize = (bytes) => {
   const safeBytes = Math.max(0, Number(bytes) || 0);
@@ -69,7 +70,7 @@ export default function DashboardPage() {
 
         if (!token) return;
 
-        const response = await fetch("/api/history", {
+        const response = await fetch(API_URL("/api/history"), {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await response.json();
@@ -131,8 +132,8 @@ export default function DashboardPage() {
 
         const [userResponse, projectResponse] =
           await Promise.all([
-            fetch("/api/auth/me", { headers }),
-            fetch("/api/projects", { headers }),
+            fetch(API_URL("/api/auth/me"), { headers }),
+            fetch(API_URL("/api/projects"), { headers }),
           ]);
 
         const userData = await userResponse.json();

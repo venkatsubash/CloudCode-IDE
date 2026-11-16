@@ -14,6 +14,7 @@ import FileExplorer from "../components/editor/FileExplorer";
 import BottomPanel from "../components/editor/BottomPanel";
 
 import { LANGS } from "../Data/editorData";
+import { API_URL, SOCKET_URL } from "../config/api";
 
 const getToken = () =>
   localStorage.getItem("token") ||
@@ -135,7 +136,7 @@ export default function EditorPage() {
       throw new Error("Your session has expired. Please log in again.");
     }
 
-    const response = await fetch(url, {
+    const response = await fetch(API_URL(url), {
       ...options,
       headers: {
         Authorization: `Bearer ${token}`,
@@ -171,7 +172,7 @@ export default function EditorPage() {
       return;
     }
 
-    const socket = io("http://localhost:5000", {
+    const socket = io(SOCKET_URL, {
       auth: { token },
       transports: ["websocket"],
     });

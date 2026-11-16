@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import "./login.css";
 import Logo from "../components/common/Logo";
 import { LOGIN_TERMINAL_LINES } from "../Data/LoginData";
+import { API_URL } from "../config/api";
 
 export default function LoginPage({ onLogin }) {
   const [email, setEmail] = useState("");
@@ -50,7 +51,7 @@ const submit = async (ev) => {
   setLoading(true);
 
   try {
-    const res = await fetch("/api/auth/login", {
+    const res = await fetch(API_URL("/api/auth/login"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
